@@ -1,0 +1,1123 @@
+{
+  "info": {
+    "_postman_id": "7a262a48-4c1d-4bfc-a620-bf71aa918ad7",
+    "name": "Mini LinkedIn API",
+    "description": "Collection complète pour le projet Mini LinkedIn — Laravel JWT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52492457",
+    "_collection_link": "https://go.postman.co/collection/52492457-7a262a48-4c1d-4bfc-a620-bf71aa918ad7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Inscription (candidat)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set('token_candidat', pm.response.json().access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alice Candidat\",\n  \"email\": \"alice@test.ma\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\",\n  \"role\": \"candidat\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inscription (recruteur)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  pm.collectionVariables.set('token_recruteur', pm.response.json().access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bob Recruteur\",\n  \"email\": \"bob@entreprise.ma\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\",\n  \"role\": \"recruteur\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Connexion (admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  pm.collectionVariables.set('token_admin', pm.response.json().access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"gayle.kihn@example.org\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Connexion (candidat)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  pm.collectionVariables.set('token_candidat', pm.response.json().access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"candidat@test.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Connexion (recruteur)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  pm.collectionVariables.set('token_recruteur', pm.response.json().access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"berry.lebsack@example.net\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Profil connecté (me)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Rafraîchir token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/refresh",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Déconnexion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 401] Accès sans token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 422] Inscription email déjà utilisé",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Doublon\",\n  \"email\": \"alice@test.ma\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Profil (candidat)",
+      "item": [
+        {
+          "name": "Créer mon profil",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Développeur Full Stack\",\n  \"bio\": \"Passionné par le développement web et les nouvelles technologies.\",\n  \"localisation\": \"Casablanca, Maroc\",\n  \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profil",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profil"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consulter mon profil",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/profil",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profil"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier mon profil",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Développeur Laravel Senior\",\n  \"disponible\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profil",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profil"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter une compétence",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"competence_id\": 1,\n  \"niveau\": \"expert\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profil/competences",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profil",
+                "competences"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retirer une compétence",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/profil/competences/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profil",
+                "competences",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 422] Créer un second profil",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Profil dupliqué\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profil",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profil"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 403] Recruteur tente de créer un profil",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Profil interdit\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profil",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "profil"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Offres d'emploi",
+      "item": [
+        {
+          "name": "Liste des offres actives",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/offres",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Liste avec filtre localisation + type",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/offres?localisation=Casablanca&type=CDI&page=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres"
+              ],
+              "query": [
+                {
+                  "key": "localisation",
+                  "value": "Casablanca"
+                },
+                {
+                  "key": "type",
+                  "value": "CDI"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Détail d'une offre",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/offres/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Créer une offre (recruteur)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Développeur Backend Laravel\",\n  \"description\": \"Nous recherchons un développeur Laravel expérimenté pour rejoindre notre équipe.\",\n  \"localisation\": \"Casablanca, Maroc\",\n  \"type\": \"CDI\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/offres",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier une offre (recruteur propriétaire)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Développeur Backend Laravel — Mise à jour\",\n  \"type\": \"CDD\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/offres/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer une offre",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/offres/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 403] Candidat tente de créer une offre",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Offre interdite\",\n  \"description\": \"Test\",\n  \"type\": \"CDI\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/offres",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 403] Recruteur modifie l'offre d'un autre",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Tentative de modification\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/offres/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 422] Champ type invalide",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Offre\",\n  \"description\": \"Test\",\n  \"type\": \"FREELANCE\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/offres",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Candidatures",
+      "item": [
+        {
+          "name": "Postuler à une offre",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Je suis très motivé par cette opportunité et je pense avoir le profil idéal.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/offres/2/candidater",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "2",
+                "candidater"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mes candidatures (candidat)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mes-candidatures",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mes-candidatures"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Candidatures reçues sur une offre (recruteur)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/offres/2/candidatures",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "2",
+                "candidatures"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Changer statut d'une candidature → acceptee",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statut\": \"acceptee\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/candidatures/1/statut",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "candidatures",
+                "1",
+                "statut"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Changer statut → refusee",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statut\": \"refusee\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/candidatures/1/statut",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "candidatures",
+                "1",
+                "statut"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 422] Double candidature",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Tentative de double candidature\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/offres/2/candidater",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "2",
+                "candidater"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 403] Recruteur consulte les candidatures d'un autre",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_recruteur}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/offres/3/candidatures",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "offres",
+                "3",
+                "candidatures"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Administration",
+      "item": [
+        {
+          "name": "Liste de tous les utilisateurs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer un utilisateur",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users/5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "users",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Désactiver une offre",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/offres/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "offres",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Réactiver une offre",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_admin}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/offres/2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "offres",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "[ERREUR 403] Candidat tente d'accéder à /admin/users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_candidat}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api"
+    },
+    {
+      "key": "token_candidat",
+      "value": ""
+    },
+    {
+      "key": "token_recruteur",
+      "value": ""
+    },
+    {
+      "key": "token_admin",
+      "value": ""
+    }
+  ]
+}
